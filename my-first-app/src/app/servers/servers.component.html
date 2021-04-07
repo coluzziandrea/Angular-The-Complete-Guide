@@ -1,14 +1,11 @@
 <label>Server name</label> <br />
-Event handling:<input
+<!-- Event handling:<input
   type="text"
   class="form-control"
   (input)="onUpdateServername($event)"
 />
-Two-way binding:<input
-  type="text"
-  class="form-control"
-  [(ngModel)]="serverName"
-/>
+Two-way binding: -->
+<input type="text" class="form-control" [(ngModel)]="serverName" />
 <button
   [disabled]="!allowNewServer"
   class="btn btn-primary"
@@ -19,7 +16,14 @@ Two-way binding:<input
 
 <!-- <p [innerText]="this.allowNewServer"></p> -->
 
-<p>{{ this.serverCreationStatus }}</p>
-<p>Server Name: {{ this.serverName }}</p>
+<!-- <p>{{ this.serverCreationStatus }}</p> -->
+
+<p *ngIf="this.serverCreated; else noServer">
+  Server was created! Server name is {{ serverName }}
+</p>
+<ng-template #noServer>
+  <p>No Server was Created</p>
+</ng-template>
+<!-- <p>Server Name: {{ this.serverName }}</p> -->
 <app-server></app-server>
 <app-server></app-server>
