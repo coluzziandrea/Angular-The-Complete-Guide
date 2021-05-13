@@ -1,0 +1,9 @@
+.log-normal {
+  background: none;
+  color: inherit;
+}
+
+.log-highlighted {
+  background: blue;
+  color: white;
+}

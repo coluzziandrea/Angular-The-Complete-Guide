@@ -1,0 +1,18 @@
+<button (click)="this.onToggleDisplay()">Display Details</button>
+<p *ngIf="this.showSecret">Secret Password = 'tuna'</p>
+
+<ul>
+  <li *ngFor="let log of this.logs">
+    <!-- <p [ngClass]="{ 'log-highlighted': log >= 5, 'log-normal': log < 5 }">
+      Click {{ log }}
+    </p> -->
+    <p
+      [ngStyle]="{
+        backgroundColor: log >= 5 ? 'blue' : 'transparent',
+        color: log >= 5 ? 'white' : 'inherit'
+      }"
+    >
+      Click {{ log }}
+    </p>
+  </li>
+</ul>
