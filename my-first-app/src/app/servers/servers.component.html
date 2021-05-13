@@ -25,5 +25,4 @@ Two-way binding: -->
   <p>No Server was Created</p>
 </ng-template>
 <!-- <p>Server Name: {{ this.serverName }}</p> -->
-<app-server></app-server>
-<app-server></app-server>
+<app-server *ngFor="let server of this.servers"></app-server>
