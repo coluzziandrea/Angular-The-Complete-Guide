@@ -2,14 +2,14 @@
 <p *ngIf="this.showSecret">Secret Password = 'tuna'</p>
 
 <ul>
-  <li *ngFor="let log of this.logs">
+  <li *ngFor="let log of this.logs; let i = index">
     <!-- <p [ngClass]="{ 'log-highlighted': log >= 5, 'log-normal': log < 5 }">
       Click {{ log }}
     </p> -->
     <p
       [ngStyle]="{
-        backgroundColor: log >= 5 ? 'blue' : 'transparent',
-        color: log >= 5 ? 'white' : 'inherit'
+        backgroundColor: i >= 4 ? 'blue' : 'transparent',
+        color: i >= 4 ? 'white' : 'inherit'
       }"
     >
       Click {{ log }}

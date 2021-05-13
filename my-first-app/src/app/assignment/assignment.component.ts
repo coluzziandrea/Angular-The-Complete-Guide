@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AssignmentComponent implements OnInit {
   showSecret: boolean = false;
-  logs: number[] = [];
+  logs: Date[] = [];
   logCounter: number = 0;
 
   constructor() {}
@@ -17,6 +17,6 @@ export class AssignmentComponent implements OnInit {
   onToggleDisplay() {
     this.showSecret = !this.showSecret;
     this.logCounter++;
-    this.logs.push(this.logCounter);
+    this.logs.push(new Date());
   }
 }
