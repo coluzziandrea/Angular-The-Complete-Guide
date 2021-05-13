@@ -11,7 +11,12 @@ export class RecipeListComponent implements OnInit {
     new Recipe(
       'a test recipe',
       'recipe for testing',
-      'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.bbcgoodfood.com%2Frecipes%2Fcollection%2Feasy-recipes&psig=AOvVaw3DRo7PmfXvsFfituF9mKjD&ust=1621006242319000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCPCA_Pv8xvACFQAAAAAdAAAAABAD'
+      'https://img.buzzfeed.com/video-api-prod/assets/eb44570519264864814264f7f0a5e47a/BFV13909_BakedRatatouille-ThumbTextless1080.jpg?output-format=auto&output-quality=auto'
+    ),
+    new Recipe(
+      'a test recipe',
+      'recipe for testing',
+      'https://img.buzzfeed.com/video-api-prod/assets/eb44570519264864814264f7f0a5e47a/BFV13909_BakedRatatouille-ThumbTextless1080.jpg?output-format=auto&output-quality=auto'
     ),
   ];
 
