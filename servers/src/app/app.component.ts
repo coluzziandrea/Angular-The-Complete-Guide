@@ -7,7 +7,28 @@ import { ServerElement } from './shared/server-element.model';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  serverElements: ServerElement[] = [
-    new ServerElement('server', 'testServer', 'just a test'),
-  ];
+  serverElements: ServerElement[] = [];
+
+  onServerAdded(serverData: { serverName: string; serverContent: string }) {
+    this.serverElements.push(
+      new ServerElement(
+        'server',
+        serverData.serverName,
+        serverData.serverContent
+      )
+    );
+  }
+
+  onBlueprintAdded(blueprintData: {
+    serverName: string;
+    serverContent: string;
+  }) {
+    this.serverElements.push(
+      new ServerElement(
+        'blueprint',
+        blueprintData.serverName,
+        blueprintData.serverContent
+      )
+    );
+  }
 }
