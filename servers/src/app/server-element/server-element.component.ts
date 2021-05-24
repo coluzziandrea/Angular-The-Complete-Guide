@@ -5,7 +5,7 @@ import { ServerElement } from '../shared/server-element.model';
   selector: 'app-server-element',
   templateUrl: './server-element.component.html',
   styleUrls: ['./server-element.component.scss'],
-  encapsulation: ViewEncapsulation.None,
+  // encapsulation: ViewEncapsulation.None,
 })
 export class ServerElementComponent implements OnInit {
   // alternative to creating the class:
