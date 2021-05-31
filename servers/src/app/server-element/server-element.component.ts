@@ -1,9 +1,11 @@
+import { Content } from '@angular/compiler/src/render3/r3_ast';
 import {
   AfterContentChecked,
   AfterContentInit,
   AfterViewChecked,
   AfterViewInit,
   Component,
+  ContentChild,
   DoCheck,
   ElementRef,
   Input,
@@ -46,11 +48,18 @@ export class ServerElementComponent
 
   @ViewChild('serverHeading', { static: true }) header!: ElementRef;
 
+  @ContentChild('contentParagraph', { static: true })
+  paragraph!: ElementRef;
+
   ngAfterViewInit(): void {
     console.log('ngAfterViewInit called!');
     console.log(
       'Header content (ngAfterViewInit): ' +
         this.header.nativeElement.textContent
+    );
+    console.log(
+      'ngAfterViewInit text content of paragraph: ' +
+        this.paragraph.nativeElement.textContent
     );
   }
 
@@ -83,6 +92,11 @@ export class ServerElementComponent
 
     console.log(
       'Header content (ngOnInit): ' + this.header.nativeElement.textContent
+    );
+
+    console.log(
+      'ngOnInit text content of paragraph: ' +
+        this.paragraph.nativeElement.textContent
     );
   }
 }
