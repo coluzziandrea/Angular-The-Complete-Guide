@@ -1,0 +1,6 @@
+<app-control (tick)="onTick($event)" (stopGame)="onStop()"></app-control>
+
+<p *ngFor="let element of this.numbers">
+  <app-even [myNumber]="element" *ngIf="element % 2 === 0"></app-even>
+  <app-odd [myNumber]="element" *ngIf="element % 2 !== 0"></app-odd>
+</p>
