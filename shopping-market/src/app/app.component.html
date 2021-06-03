@@ -1,6 +1,8 @@
-<app-header> </app-header>
+<app-header (featureSelected)="onFeatureSelected($event)"> </app-header>
 
 <div class="container">
-  <app-recipe></app-recipe>
-  <app-shopping-list></app-shopping-list>
+  <app-recipe *ngIf="this.loadedFeature === 'recipe'"></app-recipe>
+  <app-shopping-list
+    *ngIf="this.loadedFeature === 'shopping-list'"
+  ></app-shopping-list>
 </div>
