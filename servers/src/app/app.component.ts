@@ -9,6 +9,7 @@ import { ServerElement } from './shared/server-element.model';
 export class AppComponent {
   showUnless: boolean = false;
   serverElements: ServerElement[] = [];
+  switchValue: number = 10;
 
   onServerAdded(serverData: { serverName: string; serverContent: string }) {
     this.serverElements.push(
