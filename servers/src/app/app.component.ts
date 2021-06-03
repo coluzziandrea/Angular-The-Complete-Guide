@@ -7,6 +7,7 @@ import { ServerElement } from './shared/server-element.model';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
+  showUnless: boolean = false;
   serverElements: ServerElement[] = [];
 
   onServerAdded(serverData: { serverName: string; serverContent: string }) {

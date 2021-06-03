@@ -42,4 +42,9 @@
   >
     Style me with basic directive
   </p>
+
+  <button (click)="this.showUnless = !this.showUnless" class="btn btn-primary">
+    Show Unless
+  </button>
+  <p *appUnless="!this.showUnless">Unless me</p>
 </div>
