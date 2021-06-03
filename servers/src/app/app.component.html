@@ -33,5 +33,13 @@
   <hr />
 
   <p appBasicHighlight>Style me with basic directive</p>
-  <p appBetterHighlight>Style me with basic directive</p>
+  <p
+    appBetterHighlight
+    [defaultColor]="'yellow'"
+    [highlightColor]="'orange'"
+    [defaultBackgroundColor]="'gray'"
+    [highlightBackgroundColor]="'red'"
+  >
+    Style me with basic directive
+  </p>
 </div>
