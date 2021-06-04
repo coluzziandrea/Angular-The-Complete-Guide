@@ -4,8 +4,8 @@ import { Ingredient } from '../shared/ingredient.model';
 export class ShoppingListService {
   ingredientsChanged = new EventEmitter<Ingredient[]>();
   ingredients: Ingredient[] = [
-    new Ingredient('Apples', '5'),
-    new Ingredient('Milk', '12 lts'),
+    new Ingredient('Apples', 5),
+    new Ingredient('Milk', 12),
   ];
 
   getIngredients(): Ingredient[] {
