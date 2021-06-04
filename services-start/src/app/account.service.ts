@@ -1,3 +1,7 @@
+import { Injectable } from "@angular/core";
+import { LoggingService } from "./logging.service";
+
+@Injectable() // with this metadata, we tell angular that something need to be injected in this class
 export class AccountService {
   accounts = [
     {
@@ -14,11 +18,15 @@ export class AccountService {
     },
   ];
 
+  constructor(private loggingService: LoggingService) {}
+
   addAccount(name: string, status: string) {
     this.accounts.push({ name, status });
+    this.loggingService.logStatusChange(status);
   }
 
   updateAccount(id: number, newStatus: string) {
     this.accounts[id].status = newStatus;
+    this.loggingService.logStatusChange(status);
   }
 }
