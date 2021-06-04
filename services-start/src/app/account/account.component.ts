@@ -6,7 +6,8 @@ import { LoggingService } from "../logging.service";
   selector: "app-account",
   templateUrl: "./account.component.html",
   styleUrls: ["./account.component.css"],
-  providers: [LoggingService, AccountService],
+  providers: [LoggingService],
+  // do not put accountService in providers array, as angular will build another instance. Instead we want the same instance as the parent component.
 })
 export class AccountComponent {
   @Input() account: { name: string; status: string };
@@ -18,7 +19,7 @@ export class AccountComponent {
   ) {}
 
   onSetTo(status: string) {
-    this.accountService.updateAccount(this.id, this.account.status);
+    this.accountService.updateAccount(this.id, status);
     this.loggingService.logStatusChange(status);
   }
 }
