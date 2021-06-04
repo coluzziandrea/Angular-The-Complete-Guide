@@ -1,4 +1,5 @@
 import { EventEmitter } from '@angular/core';
+import { Recipe } from '../recipe/recipe.model';
 import { Ingredient } from '../shared/ingredient.model';
 
 export class ShoppingListService {
@@ -16,6 +17,13 @@ export class ShoppingListService {
     this.ingredients.push(ingredient);
 
     // notify listeners that ingredients array is changed.
+    this.ingredientsChanged.emit(this.getIngredients());
+  }
+
+  addIngredients(ingredients: Ingredient[]) {
+    // this.ingredients = this.ingredients.concat(ingredients);
+    this.ingredients.push(...ingredients);
+
     this.ingredientsChanged.emit(this.getIngredients());
   }
 }
