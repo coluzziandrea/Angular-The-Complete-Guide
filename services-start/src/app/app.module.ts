@@ -11,7 +11,8 @@ import { LoggingService } from "./logging.service";
 @NgModule({
   declarations: [AppComponent, AccountComponent, NewAccountComponent],
   imports: [BrowserModule, FormsModule],
-  providers: [AccountService, LoggingService], // if we put the service in the providers array of the app.module, we can use the same instance of the service in the other services too.
+  // providers: [AccountService, LoggingService], // if we put the service in the providers array of the app.module, we can use the same instance of the service in the other services too.
+  // adding services to this array is not necessary, if we put @Injectable({providedIn: 'root'}) to our services.
   bootstrap: [AppComponent],
 })
 export class AppModule {}

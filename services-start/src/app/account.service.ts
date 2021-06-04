@@ -1,7 +1,7 @@
 import { EventEmitter, Injectable } from "@angular/core";
 import { LoggingService } from "./logging.service";
 
-@Injectable() // with this metadata, we tell angular that something need to be injected in this class
+@Injectable({ providedIn: "root" }) // with this metadata, we tell angular that something need to be injected in this class
 export class AccountService {
   accounts = [
     {
