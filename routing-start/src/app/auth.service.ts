@@ -11,10 +11,12 @@ export class AuthService {
   }
 
   login() {
+    console.log("Loggin in...");
     this.loggedIn = true;
   }
 
   logout() {
+    console.log("Loggin out...");
     this.loggedIn = false;
   }
 }
