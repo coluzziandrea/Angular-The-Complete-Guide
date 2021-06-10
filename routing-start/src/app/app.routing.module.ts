@@ -61,7 +61,11 @@ const appRoutes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(appRoutes)],
+  imports: [
+    // if server doesn't support the redirect to index.html file, you need to use the hash mode.
+    // RouterModule.forRoot(appRoutes, { useHash: true }),
+    RouterModule.forRoot(appRoutes),
+  ],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}
