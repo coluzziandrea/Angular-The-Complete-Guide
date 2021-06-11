@@ -1,4 +1,8 @@
-<a [routerLink]="[this.index]" class="list-group-item clearfix">
+<a
+  [routerLink]="[this.index]"
+  routerLinkActive="active"
+  class="list-group-item clearfix"
+>
   <div class="pull-left">
     <h4 class="list-group-item-heading">{{ this.recipe.name }}</h4>
     <p class="list-group-item-text">{{ this.recipe.description }}</p>
