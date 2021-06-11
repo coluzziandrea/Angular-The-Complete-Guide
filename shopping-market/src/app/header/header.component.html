@@ -16,21 +16,21 @@
       (window:resize)="collapsed = true"
     >
       <ul class="nav navbar-nav">
-        <li><a href="#" (click)="this.onMenuSelect('recipe')">Recipes</a></li>
-        <li>
-          <a href="#" (click)="this.onMenuSelect('shopping-list')"
-            >Shopping List</a
-          >
+        <li routerLinkActive="active">
+          <a [routerLink]="'/recipe'">Recipes</a>
+        </li>
+        <li routerLinkActive="active">
+          <a [routerLink]="'/shopping-list'">Shopping List</a>
         </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li appDropdown class="dropdown">
-          <a href="#" class="dropdown-toggle" role="button"
+          <a class="dropdown-toggle" role="button"
             >Manage <span class="caret"></span
           ></a>
           <ul class="dropdown-menu">
-            <li><a href="#">Save Data</a></li>
-            <li><a href="#">Fetch Data</a></li>
+            <li><a>Save Data</a></li>
+            <li><a>Fetch Data</a></li>
           </ul>
         </li>
       </ul>

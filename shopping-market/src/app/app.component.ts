@@ -7,10 +7,4 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'shopping-market';
-
-  loadedFeature: string = 'recipe';
-
-  onFeatureSelected(event: string) {
-    this.loadedFeature = event;
-  }
 }
