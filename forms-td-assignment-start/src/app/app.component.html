@@ -13,6 +13,67 @@
            Upon submitting the form, you should simply print the Value of the Form to the Console.
            Optionally, display it in your template.
       -->
+      <form (ngSubmit)="onSubmit(form)" class="form-group" #form="ngForm">
+        <div class="form-group">
+          <label for="exampleInputEmail1">Email address</label>
+          <input
+            type="email"
+            class="form-control"
+            id="exampleInputEmail1"
+            aria-describedby="emailHelp"
+            placeholder="Enter email"
+            name="email"
+            email
+            ngModel
+            #emailInput="ngModel"
+          />
+          <small
+            *ngIf="!emailInput.valid && emailInput.touched"
+            id="emailHelp"
+            class="form-text text-muted"
+            >Please enter a valid email</small
+          >
+        </div>
+
+        <div class="form-group">
+          <label for="inputSub">Subscription</label>
+          <select
+            id="inputSub"
+            name="subscription"
+            class="form-control"
+            [ngModel]="this.defaultSubscription"
+          >
+            <option value="basic">Basic</option>
+            <option value="advanced">Advanced</option>
+            <option value="pro">Pro</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="inputPassword">Password</label>
+          <input
+            class="form-control"
+            type="password"
+            name="password"
+            placeholder="Enter password"
+            aria-describedby="pwdHelp"
+            required
+            ngModel
+            #pwdInput="ngModel"
+          />
+          <small
+            *ngIf="!pwdInput.valid && pwdInput.touched"
+            id="pwdHelp"
+            class="form-text text-muted"
+            >Please enter a valid password</small
+          >
+        </div>
+
+        <div *ngIf="!form.valid && form.touched" class="alert alert-warning">
+          The form is invalid!
+        </div>
+        <button class="btn btn-primary" type="submit">Submit</button>
+      </form>
     </div>
   </div>
 </div>
