@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Params } from '@angular/router';
-import { Recipe } from '../recipe.model';
+import { ActivatedRoute, Params, Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { CanComponentDeactivate } from '../../shared/can-deactivate-guard';
 import { RecipeService } from '../recipe.service';
 
 @Component({
@@ -9,14 +10,17 @@ import { RecipeService } from '../recipe.service';
   templateUrl: './recipe-edit.component.html',
   styleUrls: ['./recipe-edit.component.scss'],
 })
-export class RecipeEditComponent implements OnInit {
+export class RecipeEditComponent implements OnInit, CanComponentDeactivate {
   id!: number;
   editMode: boolean = false;
   recipeForm!: FormGroup;
+  changesSaved: boolean = false;
+  formChanged: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
-    private recipeService: RecipeService
+    private recipeService: RecipeService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -58,6 +62,8 @@ export class RecipeEditComponent implements OnInit {
       description: new FormControl(recipeDescription, Validators.required),
       ingredients: recipeIngredients,
     });
+
+    this.recipeForm.valueChanges.subscribe(() => (this.formChanged = true));
   }
 
   getIngredientControls() {
@@ -75,6 +81,26 @@ export class RecipeEditComponent implements OnInit {
       this.recipeService.updateRecipe(this.id, this.recipeForm.value);
     } else {
       this.recipeService.addRecipe(this.recipeForm.value);
+    }
+
+    this.changesSaved = true;
+
+    this.router.navigate(['../'], { relativeTo: this.route });
+  }
+
+  onCancel() {
+    this.router.navigate(['../'], { relativeTo: this.route });
+  }
+
+  canDeactivate(): boolean | Observable<boolean> | Promise<boolean> {
+    if (!this.editMode) {
+      return true;
+    }
+
+    if (this.formChanged && !this.changesSaved) {
+      return confirm('Do You want to discard changes?');
+    } else {
+      return true;
     }
   }
 

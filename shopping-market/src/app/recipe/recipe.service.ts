@@ -51,4 +51,11 @@ export class RecipeService {
     // notify listeners that array is changed.
     this.recipesChanged.next(this.getRecipes());
   }
+
+  deleteRecipe(id: number) {
+    this.recipes.splice(id - 1, 1);
+
+    // notify listeners that array is changed.
+    this.recipesChanged.next(this.getRecipes());
+  }
 }

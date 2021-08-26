@@ -4,6 +4,7 @@ import { EmptyRecipeComponent } from './recipe/empty-recipe/empty-recipe.compone
 import { RecipeDetailComponent } from './recipe/recipe-detail/recipe-detail.component';
 import { RecipeEditComponent } from './recipe/recipe-edit/recipe-edit.component';
 import { RecipeComponent } from './recipe/recipe.component';
+import { CanDeactivateGuardService } from './shared/can-deactivate-guard';
 import { ShoppingListComponent } from './shopping-list/shopping-list.component';
 
 const routes: Routes = [
@@ -31,6 +32,7 @@ const routes: Routes = [
       {
         path: ':id/edit',
         component: RecipeEditComponent,
+        canDeactivate: [CanDeactivateGuardService],
       },
     ],
   },
