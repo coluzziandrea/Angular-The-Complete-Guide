@@ -16,6 +16,7 @@ import { ShoppingListService } from './shopping-list/shopping-list.service';
 import { EmptyRecipeComponent } from './recipe/empty-recipe/empty-recipe.component';
 import { RecipeEditComponent } from './recipe/recipe-edit/recipe-edit.component';
 import { CanDeactivateGuardService } from './shared/can-deactivate-guard';
+import { RecipeService } from './recipe/recipe.service';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,7 @@ import { CanDeactivateGuardService } from './shared/can-deactivate-guard';
     RecipeEditComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, ReactiveFormsModule, FormsModule],
-  providers: [ShoppingListService, CanDeactivateGuardService],
+  providers: [ShoppingListService, CanDeactivateGuardService, RecipeService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
