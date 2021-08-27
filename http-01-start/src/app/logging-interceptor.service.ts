@@ -8,20 +8,21 @@ import {
 import { Observable } from "rxjs";
 import { tap } from "rxjs/operators";
 
-export class AuthInterceptorService implements HttpInterceptor {
+export class LoggingInterceptorService implements HttpInterceptor {
   intercept(
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    // this will be ran BEFORE the HTTP request leaves our application
+    console.log(
+      `Outgoing request: ${req.method} ${
+        req.url
+      } with headers: ${JSON.stringify(req.headers)}`
+    );
 
-    const modifiedReq = req.clone({
-      headers: req.headers.append("Auth", "xyz"),
-    });
-
-    return next.handle(modifiedReq).pipe(
+    return next.handle(req).pipe(
       tap((event) => {
         if (event.type === HttpEventType.Response) {
+          console.log(`Incoming Response: ${JSON.stringify(event.body)}`);
         }
       })
     );
