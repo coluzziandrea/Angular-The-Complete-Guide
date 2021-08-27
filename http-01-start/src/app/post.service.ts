@@ -1,4 +1,4 @@
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Subject, throwError } from "rxjs";
 import { catchError, map } from "rxjs/operators";
@@ -16,7 +16,9 @@ export class PostService {
   createAndStorePost(title: string, content: string) {
     const postData: Post = { title, content };
     this.http
-      .post<{ name: string }>(PostService.API_URL + "posts.json", postData)
+      .post<{ name: string }>(PostService.API_URL + "posts.json", postData, {
+        observe: "response",
+      })
       .subscribe(
         (responseData) => {
           console.log(responseData);
@@ -32,8 +34,13 @@ export class PostService {
   }
 
   fetchPosts() {
+    let searchParams = new HttpParams();
+    searchParams = searchParams.append("print", "pretty");
     return this.http
-      .get<{ [key: string]: Post }>(PostService.API_URL + "posts.json")
+      .get<{ [key: string]: Post }>(PostService.API_URL + "posts.json", {
+        headers: new HttpHeaders({ "Custom-Header": "hello" }),
+        params: searchParams,
+      })
       .pipe(
         map((responseData) => {
           const postsArray: Post[] = [];
