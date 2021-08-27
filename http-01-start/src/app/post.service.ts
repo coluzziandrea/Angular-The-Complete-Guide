@@ -19,6 +19,14 @@ export class PostService {
       });
   }
 
+  deleteAllPosts() {
+    this.http
+      .delete<{}>(PostService.API_URL + "posts.json")
+      .subscribe((responseData) => {
+        console.log(responseData);
+      });
+  }
+
   fetchPosts() {
     return this.http
       .get<{ [key: string]: Post }>(PostService.API_URL + "posts.json")
