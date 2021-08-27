@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { map } from "rxjs/operators";
 import { Post } from "./post.model";
+import { PostService } from "./post.service";
 
 @Component({
   selector: "app-root",
@@ -9,23 +10,27 @@ import { Post } from "./post.model";
   styleUrls: ["./app.component.css"],
 })
 export class AppComponent implements OnInit {
-  static API_URL: string =
-    "https://ng-complete-guide-728c7-default-rtdb.europe-west1.firebasedatabase.app/";
-  loadedPosts = [];
+  loadedPosts: Post[] = [];
+  isLoading = false;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private postsService: PostService) {}
 
   ngOnInit() {
     this.fetchPosts();
   }
 
+  private fetchPosts() {
+    this.isLoading = true;
+    this.postsService.fetchPosts().subscribe((response) => {
+      this.isLoading = false;
+      this.loadedPosts = response;
+    });
+  }
+
   onCreatePost(postData: { title: string; content: string }) {
     // Send Http request
-    this.http
-      .post<{ name: string }>(AppComponent.API_URL + "posts.json", postData)
-      .subscribe((responseData) => {
-        console.log(responseData);
-      });
+
+    this.postsService.createAndStorePost(postData.title, postData.content);
   }
 
   onFetchPosts() {
@@ -35,25 +40,5 @@ export class AppComponent implements OnInit {
 
   onClearPosts() {
     // Send Http request
-  }
-
-  private fetchPosts() {
-    this.http
-      .get<{ [key: string]: Post }>(AppComponent.API_URL + "posts.json")
-      .pipe(
-        map((responseData) => {
-          const postsArray: Post[] = [];
-
-          for (const key in responseData) {
-            if (responseData.hasOwnProperty(key)) {
-              postsArray.push({ ...responseData[key], id: key });
-            }
-          }
-          return postsArray;
-        })
-      )
-      .subscribe((response) => {
-        console.log(response);
-      });
   }
 }
