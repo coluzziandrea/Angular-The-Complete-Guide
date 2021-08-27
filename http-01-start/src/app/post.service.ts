@@ -1,6 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { map } from "rxjs/operators";
+import { Subject, throwError } from "rxjs";
+import { catchError, map } from "rxjs/operators";
 import { Post } from "./post.model";
 
 @Injectable({ providedIn: "root" })
@@ -8,15 +9,22 @@ export class PostService {
   static API_URL: string =
     "https://ng-complete-guide-728c7-default-rtdb.europe-west1.firebasedatabase.app/";
 
+  error = new Subject<string>();
+
   constructor(private http: HttpClient) {}
 
   createAndStorePost(title: string, content: string) {
     const postData: Post = { title, content };
     this.http
       .post<{ name: string }>(PostService.API_URL + "posts.json", postData)
-      .subscribe((responseData) => {
-        console.log(responseData);
-      });
+      .subscribe(
+        (responseData) => {
+          console.log(responseData);
+        },
+        (error) => {
+          this.error.next(error.message);
+        }
+      );
   }
 
   deleteAllPosts() {
@@ -36,6 +44,10 @@ export class PostService {
             }
           }
           return postsArray;
+        }),
+        catchError((errorResponse) => {
+          // send analytics to server
+          return throwError(errorResponse);
         })
       );
   }
