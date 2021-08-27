@@ -12,6 +12,7 @@ import { PostService } from "./post.service";
 export class AppComponent implements OnInit {
   loadedPosts: Post[] = [];
   isLoading = false;
+  errorMessage: string;
 
   constructor(private http: HttpClient, private postsService: PostService) {}
 
@@ -21,10 +22,17 @@ export class AppComponent implements OnInit {
 
   private fetchPosts() {
     this.isLoading = true;
-    this.postsService.fetchPosts().subscribe((response) => {
-      this.isLoading = false;
-      this.loadedPosts = response;
-    });
+    this.postsService.fetchPosts().subscribe(
+      (response) => {
+        this.isLoading = false;
+        this.loadedPosts = response;
+      },
+      (error) => {
+        this.isLoading = false;
+        console.log(error);
+        this.errorMessage = error.message;
+      }
+    );
   }
 
   onCreatePost(postData: { title: string; content: string }) {
@@ -40,7 +48,8 @@ export class AppComponent implements OnInit {
 
   onClearPosts() {
     // Send Http request
-    this.postsService.deleteAllPosts();
-    this.loadedPosts = [];
+    this.postsService.deleteAllPosts().subscribe(() => {
+      this.loadedPosts = [];
+    });
   }
 }

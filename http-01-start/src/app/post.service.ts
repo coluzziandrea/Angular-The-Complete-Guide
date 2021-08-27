@@ -20,11 +20,7 @@ export class PostService {
   }
 
   deleteAllPosts() {
-    this.http
-      .delete<{}>(PostService.API_URL + "posts.json")
-      .subscribe((responseData) => {
-        console.log(responseData);
-      });
+    return this.http.delete<{}>(PostService.API_URL + "posts.json");
   }
 
   fetchPosts() {
