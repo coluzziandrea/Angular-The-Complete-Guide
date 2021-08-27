@@ -17,6 +17,7 @@ import { EmptyRecipeComponent } from './recipe/empty-recipe/empty-recipe.compone
 import { RecipeEditComponent } from './recipe/recipe-edit/recipe-edit.component';
 import { CanDeactivateGuardService } from './shared/can-deactivate-guard';
 import { RecipeService } from './recipe/recipe.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,13 @@ import { RecipeService } from './recipe/recipe.service';
     EmptyRecipeComponent,
     RecipeEditComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, ReactiveFormsModule, FormsModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    ReactiveFormsModule,
+    FormsModule,
+  ],
   providers: [ShoppingListService, CanDeactivateGuardService, RecipeService],
   bootstrap: [AppComponent],
 })
