@@ -1,7 +1,12 @@
-import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
+import {
+  HttpClient,
+  HttpEventType,
+  HttpHeaders,
+  HttpParams,
+} from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Subject, throwError } from "rxjs";
-import { catchError, map } from "rxjs/operators";
+import { catchError, map, tap } from "rxjs/operators";
 import { Post } from "./post.model";
 
 @Injectable({ providedIn: "root" })
@@ -30,7 +35,21 @@ export class PostService {
   }
 
   deleteAllPosts() {
-    return this.http.delete<{}>(PostService.API_URL + "posts.json");
+    return this.http
+      .delete(PostService.API_URL + "posts.json", {
+        observe: "events",
+        responseType: "text",
+      })
+      .pipe(
+        tap((event) => {
+          if (event.type === HttpEventType.Response) {
+            console.log(event.body);
+          } else if (event.type === HttpEventType.DownloadProgress) {
+            // it can be very helpful to inform user about the status of the request
+          }
+          console.log(event);
+        })
+      );
   }
 
   fetchPosts() {
@@ -40,6 +59,7 @@ export class PostService {
       .get<{ [key: string]: Post }>(PostService.API_URL + "posts.json", {
         headers: new HttpHeaders({ "Custom-Header": "hello" }),
         params: searchParams,
+        responseType: "json", // default
       })
       .pipe(
         map((responseData) => {
