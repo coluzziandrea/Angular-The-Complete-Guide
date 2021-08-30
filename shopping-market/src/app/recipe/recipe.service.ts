@@ -66,4 +66,8 @@ export class RecipeService {
     // notify listeners that array is changed.
     this.recipesChanged.next(this.getRecipes());
   }
+
+  hasData() {
+    return this.recipes.length > 0;
+  }
 }

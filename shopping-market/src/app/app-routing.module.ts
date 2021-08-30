@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { EmptyRecipeComponent } from './recipe/empty-recipe/empty-recipe.component';
 import { RecipeDetailComponent } from './recipe/recipe-detail/recipe-detail.component';
 import { RecipeEditComponent } from './recipe/recipe-edit/recipe-edit.component';
+import { RecipeResolverService } from './recipe/recipe-resolver.service';
 import { RecipeComponent } from './recipe/recipe.component';
 import { CanDeactivateGuardService } from './shared/can-deactivate-guard';
 import { ShoppingListComponent } from './shopping-list/shopping-list.component';
@@ -28,6 +29,7 @@ const routes: Routes = [
       {
         path: ':id',
         component: RecipeDetailComponent,
+        resolve: [RecipeResolverService],
       },
       {
         path: ':id/edit',

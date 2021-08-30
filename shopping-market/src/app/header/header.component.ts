@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { DataStorageService } from '../shared/data-storage.service';
 
 @Component({
@@ -6,8 +7,10 @@ import { DataStorageService } from '../shared/data-storage.service';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, OnDestroy {
   collapsed = true;
+
+  recipesSubscription!: Subscription;
 
   constructor(private dataService: DataStorageService) {}
 
@@ -18,6 +21,17 @@ export class HeaderComponent implements OnInit {
   }
 
   onFetchData() {
-    this.dataService.fetchRecipes();
+    this.destroySubscription();
+    this.recipesSubscription = this.dataService.fetchRecipes().subscribe();
+  }
+
+  ngOnDestroy(): void {
+    this.destroySubscription();
+  }
+
+  private destroySubscription() {
+    if (this.recipesSubscription != null) {
+      this.recipesSubscription.unsubscribe();
+    }
   }
 }
